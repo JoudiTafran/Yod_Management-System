@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using YodMS.Models;
+using YodMS.Models.DataBase_Manager;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
