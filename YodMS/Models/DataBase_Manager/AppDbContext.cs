@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace YodMS.Models
+namespace YodMS.Models.DataBase_Manager
 {
     public class AppDbContext : DbContext
     {
