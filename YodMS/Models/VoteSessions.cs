@@ -2,7 +2,8 @@
 {
     public class VoteSessions
     {
-        public int VoteId { get; set; }
+        public int VoteSessionId { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -14,4 +15,5 @@
         public Users CreatedByUser { get; set; }
         public ICollection<Votes> Votes { get; set; }
     }
+
 }

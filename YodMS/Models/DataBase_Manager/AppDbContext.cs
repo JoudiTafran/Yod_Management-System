@@ -22,6 +22,16 @@ namespace YodMS.Models.DataBase_Manager
             modelBuilder.Entity<RoleDocPerms>()
                 .HasKey(rp => new { rp.RoleId, rp.DocTypeId });
 
+            modelBuilder.Entity<DocumentTypes>().HasKey(dt => dt.DocTypeId);
+            modelBuilder.Entity<Users>().HasKey(u => u.UserId);
+            modelBuilder.Entity<Roles>().HasKey(r => r.RoleId);
+            modelBuilder.Entity<Documents>().HasKey(d => d.DocId);
+            modelBuilder.Entity<DocumentTypes>().HasKey(dt => dt.DocTypeId);
+            modelBuilder.Entity<Reviews>().HasKey(r => r.ReviewId);
+            modelBuilder.Entity<Votes>().HasKey(v => v.VoteId);
+            modelBuilder.Entity<VoteSessions>().HasKey(vs => vs.VoteSessionId);
+
+
             modelBuilder.Entity<RoleDocPerms>()
                 .HasOne(rp => rp.Role)
                 .WithMany(r => r.RoleDocPerms)
@@ -38,6 +48,11 @@ namespace YodMS.Models.DataBase_Manager
                 .WithMany(u => u.Documents)
                 .HasForeignKey(d => d.OwnerUserId);
 
+            modelBuilder.Entity<Documents>()
+                .HasOne(d => d.DocType)
+                .WithMany(dt => dt.Documents)
+                .HasForeignKey(d => d.DocTypeId);
+
             // علاقة Review ↔ Document
             modelBuilder.Entity<Reviews>()
                 .HasOne(r => r.Document)
@@ -52,7 +67,7 @@ namespace YodMS.Models.DataBase_Manager
             modelBuilder.Entity<Votes>()
                 .HasOne(v => v.VoteSession)
                 .WithMany(s => s.Votes)
-                .HasForeignKey(v => v.VoteId);
+                .HasForeignKey(v => v.VoteSessionId);
 
             modelBuilder.Entity<Votes>()
                 .HasOne(v => v.VoterUser)
