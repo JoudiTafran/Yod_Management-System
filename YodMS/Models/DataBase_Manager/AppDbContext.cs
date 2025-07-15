@@ -62,17 +62,20 @@ namespace YodMS.Models.DataBase_Manager
             modelBuilder.Entity<Reviews>()
                 .HasOne(r => r.ReviewerUser)
                 .WithMany(u => u.Reviews)
-                .HasForeignKey(r => r.ReviewerUserId);
+                .HasForeignKey(r => r.ReviewerUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Votes>()
                 .HasOne(v => v.VoteSession)
                 .WithMany(s => s.Votes)
-                .HasForeignKey(v => v.VoteSessionId);
+                .HasForeignKey(v => v.VoteSessionId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Votes>()
                 .HasOne(v => v.VoterUser)
                 .WithMany(u => u.Votes)
-                .HasForeignKey(v => v.VoterUserId);
+                .HasForeignKey(v => v.VoterUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<VoteSessions>()
                 .HasOne(v => v.CreatedByUser)
